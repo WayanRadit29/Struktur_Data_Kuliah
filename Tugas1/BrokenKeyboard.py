@@ -1,14 +1,16 @@
+import sys
 from collections import deque
 
-N = int(input())
-for _ in range(N):
-    long_text = input()
+result = []
+input_data = sys.stdin.read().splitlines()  # Membaca semua input sekaligus, lalu split ke baris
+
+for processed_text in input_data:
     home_res = deque()
     end_res = deque()
     current_text = ""
     mode = "end"
-    
-    for char in long_text:
+
+    for char in processed_text:
         if char == '[':
             if mode == "end":
                 end_res.append(current_text)
@@ -31,12 +33,6 @@ for _ in range(N):
     else:
         end_res.append(current_text)
 
-    
-    print("".join(home_res) + "".join(end_res))
+    result.append("".join(home_res) + "".join(end_res))
 
-
-
-
-
-
-
+sys.stdout.write("\n".join(result) + "\n")  # Cetak sekaligus untuk menghindari overhead print()
